@@ -22,6 +22,7 @@ def get_patients(request):
     return JsonResponse(serializer.data, safe=False)
 
 
+@api_view(['GET{id}'])
 def get_patient(request, id):
     try:
         patient = Patient.objects.get(pk=id)
@@ -31,6 +32,7 @@ def get_patient(request, id):
         return JsonResponse({'message': 'The patient does not exist!'}, status=404)
 
 
+@api_view(['POST'])
 @csrf_exempt
 def create_patient(request):
     data = JSONParser().parse(request)
@@ -46,6 +48,7 @@ def create_patient(request):
     return JsonResponse(serializer.errors, status=400)
 
 
+@api_view(['PUT'])
 @csrf_exempt
 def update_patient(request, id):
     patientid = Patient.objects.get(pk=id)
@@ -57,12 +60,14 @@ def update_patient(request, id):
     return JsonResponse(serializer.errors, status=400)
 
 
+@api_view(['DELETE'])
 def delete_patient(request, id):
     patient = Patient.objects.get(id=id)
     patient.delete()
     return JsonResponse({'message': 'Patient was deleted successfully!'}, status=204)
 
 
+@api_view(['POST'])
 @csrf_exempt
 def login_verify(request):
     data = JSONParser().parse(request)
@@ -72,7 +77,3 @@ def login_verify(request):
             return JsonResponse({'message': ' Bem vindo ao HealthApp!'}, status=200)
 
     return JsonResponse({'message': 'User name não autorizado!'}, status=405)
-
-
-def checkIfExists(data):
-    return Patient.objects.filter(name=data['name']).exists()
