@@ -8,7 +8,6 @@
 
 ```python
 docker-compose up --build -d # para iniciar o container
-docker-compose exec web python manage.py makemigrations #para criar as migrations
 docker-compose exec web python manage.py migrate #para executar as migrations
 ```
 
