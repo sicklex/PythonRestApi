@@ -5,7 +5,7 @@ from Healthapp.models import Login, Patient
 class PatientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Patient
-        fields = ('name', 'Data_de_Nascimento')
+        fields = ('id', 'name', 'Data_de_Nascimento')
 
 
 class LoginSerializer(serializers.ModelSerializer):
