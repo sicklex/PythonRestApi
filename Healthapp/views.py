@@ -22,7 +22,6 @@ def get_patients(request):
     return JsonResponse(serializer.data, safe=False)
 
 
-@api_view(['GET{id}'])
 def get_patient(request, id):
     try:
         patient = Patient.objects.get(pk=id)
